@@ -4,9 +4,15 @@ const StatefulForm = () => {
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (password.length < 6) {
+      setError("password must be at least 6 characters or longer");
+    } else {
+      setError("");
+    }
     console.log(`name: ${name}`);
     console.log(`email: ${email}`);
     console.log(`password: ${password}`);
@@ -54,6 +60,7 @@ const StatefulForm = () => {
           className="mb-3 mt-3 w-2/4 rounded-lg border-none px-2 py-4 outline-none"
           required
         />
+        {error && <p className="text-sm text-red-500">{error}</p>}
         <br />
         <input
           type="submit"
